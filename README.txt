@@ -1,7 +1,8 @@
 Envelopes
 =========
 
-Envelopes is a Garbage free library for serializing messages.
+Envelopes is a Garbage free library for serializing primitive types into
+a byte array.
 
 Envelope instances use pre-allocate fixed size buffers wherever possible
 to ensure zero per-frame allocations. However, if an envelope does need
@@ -11,9 +12,10 @@ To avoid contructor allocation, Envelope instances are pooled. To get
 a new instance, use Envelope.Take(). When finished with the instance, use
 Envelope.Return(Envelope instance);
 
-Envelopes work like a stack. Call Envelope.Push to push primitive types
+Envelopes work like a queue. Call Envelope.Push to push primitive types
 into the envelope, then Envelope.Pop(Int32,Float,FloatArray etc) to 
-retrieve the types from the envelope. 
+retrieve the types from the envelope. Minimal type information is stored in
+the envelope to aid debugging.
 
 The .Bytes property and the .Length property are used to perform work with
 the serialized data, such as persisting or sending over a network.
