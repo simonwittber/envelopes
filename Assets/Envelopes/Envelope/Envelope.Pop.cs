@@ -24,6 +24,12 @@ namespace Envelopes
             return ReadInt32();
         }
 
+        public UInt32 PopUInt32()
+        {
+            CheckTypeCode(typeof(UInt32));
+            return ReadUInt32();
+        }
+
         public Int64 PopInt64()
         {
             CheckTypeCode(typeof(Int64));

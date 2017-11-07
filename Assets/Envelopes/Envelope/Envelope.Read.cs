@@ -40,9 +40,27 @@ namespace Envelopes
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        Int32 ReadInt32()
+        unsafe Int32 ReadInt32()
         {
-            var v = System.BitConverter.ToInt32(this.bytes, readIndex);
+            int v;
+            fixed (byte* pbyte = &bytes[readIndex])
+            {
+                if (readIndex % 4 == 0)
+                { // data is aligned 
+                    v = *((int*)pbyte);
+                }
+                else
+                {
+                    if (BitConverter.IsLittleEndian)
+                    {
+                        v = (*pbyte) | (*(pbyte + 1) << 8) | (*(pbyte + 2) << 16) | (*(pbyte + 3) << 24);
+                    }
+                    else
+                    {
+                        v = (*pbyte << 24) | (*(pbyte + 1) << 16) | (*(pbyte + 2) << 8) | (*(pbyte + 3));
+                    }
+                }
+            }
             readIndex += 4;
             return v;
         }
@@ -50,31 +68,49 @@ namespace Envelopes
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         UInt32 ReadUInt32()
         {
-            var v = System.BitConverter.ToUInt32(this.bytes, readIndex);
-            readIndex += 4;
-            return v;
+            return (UInt32)ReadInt32();
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        float ReadFloat()
+        unsafe float ReadFloat()
         {
-            var v = System.BitConverter.ToSingle(this.bytes, readIndex);
-            readIndex += 4;
-            return v;
+            int v = ReadInt32();
+            return *(float*)&v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        double ReadDouble()
+        unsafe double ReadDouble()
         {
-            var v = System.BitConverter.ToDouble(this.bytes, readIndex);
-            readIndex += 8;
-            return v;
+            var v = ReadInt64();
+            return *(double*)&v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        Int64 ReadInt64()
+        unsafe Int64 ReadInt64()
         {
-            var v = System.BitConverter.ToInt64(this.bytes, readIndex);
+            Int64 v;
+            fixed (byte* pbyte = &bytes[readIndex])
+            {
+                if (readIndex % 8 == 0)
+                { // data is aligned 
+                    v = *((Int64*)pbyte);
+                }
+                else
+                {
+                    if (BitConverter.IsLittleEndian)
+                    {
+                        int i1 = (*pbyte) | (*(pbyte + 1) << 8) | (*(pbyte + 2) << 16) | (*(pbyte + 3) << 24);
+                        int i2 = (*(pbyte + 4)) | (*(pbyte + 5) << 8) | (*(pbyte + 6) << 16) | (*(pbyte + 7) << 24);
+                        v = (UInt32)i1 | ((Int64)i2 << 32);
+                    }
+                    else
+                    {
+                        int i1 = (*pbyte << 24) | (*(pbyte + 1) << 16) | (*(pbyte + 2) << 8) | (*(pbyte + 3));
+                        int i2 = (*(pbyte + 4) << 24) | (*(pbyte + 5) << 16) | (*(pbyte + 6) << 8) | (*(pbyte + 7));
+                        v = (UInt32)i2 | ((Int64)i1 << 32);
+                    }
+                }
+            }
             readIndex += 8;
             return v;
         }
