@@ -21,6 +21,34 @@ The .Bytes property and the .Length property are used to perform work with
 the serialized data, such as persisting or sending over a network.
 
 
+Why not Protobuf/JSON/...
+=========================
+Envelopes are concerned with serialization of data for transport. They are
+simple and rapid, no need for a tutorial, or model definition or separate
+compile step. Envelopes do this without memory allocation or reflection,
+which are important on constrained devices and video games. For example:
+
+```csharp
+var e = Envelope.Take()
+e.Push("Simon Wittber")
+e.Push(1979)
+e.Push(new[] { 123123123, 456456456, 789789789 });
+WriteToSocket(e.Bytes, e.Length);
+Envelope.Return(e);
+```
+
+and on the opposite end:
+
+```csharp
+var e = Envelope.Take();
+ReadFromSocket(e.Bytes, 0, e.MAX_ENVELOPE_SIZE);
+var name = e.PopString();
+var year = e.PopInt32();
+var phoneNumbers = e.PopInt64Array()
+Envelope.Return(e);
+```
+
+
 License
 =======
 Copyright 2017 Simon Wittber <simonwittber@gmail.com>
