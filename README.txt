@@ -28,7 +28,7 @@ simple and rapid, no need for a tutorial, or model definition or separate
 compile step. Envelopes do this without memory allocation or reflection,
 which are important on constrained devices and video games. For example:
 
-```csharp
+```
 var e = Envelope.Take()
 e.Push("Simon Wittber")
 e.Push(1979)
@@ -39,7 +39,7 @@ Envelope.Return(e);
 
 and on the opposite end:
 
-```csharp
+```
 var e = Envelope.Take();
 ReadFromSocket(e.Bytes, 0, e.MAX_ENVELOPE_SIZE);
 var name = e.PopString();
