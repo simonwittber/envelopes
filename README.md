@@ -48,6 +48,9 @@ var phoneNumbers = e.PopInt64Array()
 Envelope.Return(e);
 ```
 
+All this happens with minimal buffer copies, and zero allocation (except for
+strings of course!).
+
 
 License
 =======
