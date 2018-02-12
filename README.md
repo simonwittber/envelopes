@@ -1,6 +1,8 @@
 Envelopes
 =========
 
+```git submodule add https://github.com/simonwittber/envelopes Envelopes```
+
 Envelopes is a Garbage free library for serializing primitive types into
 a byte array.
 
