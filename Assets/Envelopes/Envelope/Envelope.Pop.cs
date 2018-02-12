@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Envelopes
+namespace DifferentMethods.Envelopes
 {
     public partial class Envelope
     {

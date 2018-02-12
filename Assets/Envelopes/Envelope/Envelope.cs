@@ -4,7 +4,7 @@ using System.Runtime.InteropServices.ComTypes;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Envelopes
+namespace DifferentMethods.Envelopes
 {
     public class EnvelopePool
     {
@@ -97,12 +97,24 @@ namespace Envelopes
             return e;
         }
 
+        public void Clear()
+        {
+            readIndex = writeIndex = 0;
+        }
+
         public byte[] Bytes
         {
             get
             {
                 return bytes;
             }
+        }
+
+        public byte[] ToArray()
+        {
+            var a = new byte[Length];
+            System.Array.Copy(bytes, a, Length);
+            return a;
         }
 
         public int Available

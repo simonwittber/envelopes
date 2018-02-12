@@ -5,7 +5,7 @@ using NUnit.Framework;
 using System.Collections;
 using System;
 
-namespace Envelopes
+namespace DifferentMethods.Envelopes
 {
     public class EnvelopeTest
     {

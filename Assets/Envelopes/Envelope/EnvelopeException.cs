@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Envelopes
+namespace DifferentMethods.Envelopes
 {
     [Serializable]
     public class EnvelopeException : Exception

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Envelopes
+namespace DifferentMethods.Envelopes
 {
     public partial class Envelope : Stream
     {

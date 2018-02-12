@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Envelopes
+namespace DifferentMethods.Envelopes
 {
     public partial class Envelope
     {

@@ -2,7 +2,7 @@ using System;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-namespace Envelopes
+namespace DifferentMethods.Envelopes
 {
     public partial class Envelope
     {
