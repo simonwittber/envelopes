@@ -19,7 +19,7 @@ namespace DifferentMethods.Envelopes
             }
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         string ReadString()
         {
             var isNotNull = ReadBool();
@@ -33,13 +33,13 @@ namespace DifferentMethods.Envelopes
             return null;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         bool ReadBool()
         {
             return this.bytes[readIndex++] == (byte)1;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         unsafe Int32 ReadInt32()
         {
             int v;
@@ -65,27 +65,27 @@ namespace DifferentMethods.Envelopes
             return v;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         UInt32 ReadUInt32()
         {
             return (UInt32)ReadInt32();
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         unsafe float ReadFloat()
         {
             int v = ReadInt32();
             return *(float*)&v;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         unsafe double ReadDouble()
         {
             var v = ReadInt64();
             return *(double*)&v;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         unsafe Int64 ReadInt64()
         {
             Int64 v;
@@ -115,37 +115,37 @@ namespace DifferentMethods.Envelopes
             return v;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         Vector2 ReadVector2()
         {
             return new Vector2(ReadFloat(), ReadFloat());
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         Vector3 ReadVector3()
         {
             return new Vector3(ReadFloat(), ReadFloat(), ReadFloat());
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         Vector4 ReadVector4()
         {
             return new Vector4(ReadFloat(), ReadFloat(), ReadFloat(), ReadFloat());
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         Quaternion ReadQuaternion()
         {
             return new Quaternion(ReadFloat(), ReadFloat(), ReadFloat(), ReadFloat());
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         Color ReadColor()
         {
             return new Color(ReadFloat(), ReadFloat(), ReadFloat(), ReadFloat());
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         Envelope ReadEnvelope()
         {
             var e = Envelope.Take();
