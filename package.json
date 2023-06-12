@@ -1,0 +1,12 @@
+{
+  "displayName": "Envelopes",
+  "name": "com.dffrnt.envelopes",
+  "unity": "2022.3",
+  "version": "0.0.1",
+  "description": "Just simple serialization for games.",
+  "author": "Simon Wittber <simonwittber@unity3d.com> (https://github.com/simonwittber)",
+  
+  "type": "library",
+  "dependencies": {
+  }
+}
